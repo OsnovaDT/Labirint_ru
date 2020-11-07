@@ -55,3 +55,31 @@ class PublishingHouse(models.Model):
         verbose_name = 'Издательство'
         verbose_name_plural = 'Издательства'
         ordering = ['name']
+
+
+# Publishing house series
+class Series(models.Model):
+    name = models.CharField(
+        'Название',
+        max_length=100,
+        unique=True,
+    )
+    info = models.TextField(
+        'Информация',
+        help_text='Информация о серии',
+        null=True,
+        blank=True,
+    )
+    publishing_house = models.ForeignKey(
+        'PublishingHouse',
+        on_delete=models.CASCADE,
+        verbose_name='Издательство'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Серия'
+        verbose_name_plural = 'Серии'
+        ordering = ['name']
