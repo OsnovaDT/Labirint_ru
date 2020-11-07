@@ -83,3 +83,19 @@ class Series(models.Model):
         verbose_name = 'Серия'
         verbose_name_plural = 'Серии'
         ordering = ['name']
+
+
+class Genre(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Название',
+        unique=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
+        ordering = ['name']
