@@ -1,10 +1,11 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'kx+s64nn*5j%yemgdnvuh=c+(fhwmon!fi!1kv0=^3v78s0yye'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -50,10 +51,10 @@ WSGI_APPLICATION = 'labirint_ru.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_db',
-        'USER': 'django_user',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
         'PORT': '6432',
     }
 }
