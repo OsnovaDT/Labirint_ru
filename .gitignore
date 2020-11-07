@@ -1,0 +1,11 @@
+.env
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+__pycache__/
+*/__pycache__/
+
+media/*
+!*media
