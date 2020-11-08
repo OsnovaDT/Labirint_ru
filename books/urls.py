@@ -5,45 +5,50 @@ from books.views import (
     AuthorsListView, GenreListView
 ) 
 
+from django.views.decorators.cache import cache_page
 
 app_name = 'books'
 
 urlpatterns = [
     # Index
-    path('', BookListView.as_view(), name='index'),
+    path(
+        '',
+        cache_page(60 * 30)(BookListView.as_view()),
+        name='index'
+    ),
 
     # Book detail
     path(
         'book/<int:pk>/',
-        BookDetailView.as_view(),
+        cache_page(60 * 30)(BookDetailView.as_view()),
         name='book_detail'
     ),
 
     # Publishing house books
     path(
         'publishing_house/<int:publ_house_id>/',
-        PublishingHouseListView.as_view(),
+        cache_page(60 * 30)(PublishingHouseListView.as_view()),
         name='publ_house'
     ),
 
     # Series books
     path(
         'episode/<int:episode_id>/',
-        SeriesListView.as_view(),
+        cache_page(60 * 30)(SeriesListView.as_view()),
         name='episode'
     ),
 
     # Authors books
     path(
         'author/<int:author_id>/',
-        AuthorsListView.as_view(),
+        cache_page(60 * 30)(AuthorsListView.as_view()),
         name='author'
     ),
 
     # Genre books
     path(
         'genre/<int:genre_id>/',
-        GenreListView.as_view(),
+        cache_page(60 * 30)(GenreListView.as_view()),
         name='genre'
     ),
 ]
