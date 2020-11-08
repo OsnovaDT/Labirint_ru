@@ -13,7 +13,9 @@ class BookListView(LoginRequiredMixin, ListView):
     template_name = 'books/index.html'
     paginate_by = 12
     context_object_name = 'books'
-    queryset = Book.objects.all()
+    queryset = Book.objects.prefetch_related(
+        'publishing_house', 'series', 'authors'
+    )
 
 
 # Book detail info
@@ -31,6 +33,8 @@ class PublishingHouseListView(ListView):
     def get_queryset(self):
         return Book.objects.filter(
             publishing_house=self.kwargs['publ_house_id']
+        ).prefetch_related(
+            'publishing_house', 'series', 'authors'
         )
 
     def get_context_data(self, *args, **kwargs):
@@ -38,7 +42,7 @@ class PublishingHouseListView(ListView):
         context['publ_house'] = PublishingHouse.objects.get(
             pk=self.kwargs['publ_house_id']
         )
-        context['series'] = context['publ_house'].series_set.all()
+        context['series'] = context['publ_house'].series.all()
 
         return context
 
@@ -52,6 +56,8 @@ class SeriesListView(ListView):
     def get_queryset(self):
         return Book.objects.filter(
             series=self.kwargs['episode_id']
+        ).prefetch_related(
+            'publishing_house', 'series', 'authors'
         )
 
     def get_context_data(self, *args, **kwargs):
@@ -72,6 +78,8 @@ class AuthorsListView(ListView):
     def get_queryset(self):
         return Book.objects.filter(
             authors=self.kwargs['author_id']
+        ).prefetch_related(
+            'publishing_house', 'series', 'authors'
         )
 
     def get_context_data(self, *args, **kwargs):
@@ -92,6 +100,8 @@ class GenreListView(ListView):
     def get_queryset(self):
         return Book.objects.filter(
             genres=self.kwargs['genre_id']
+        ).prefetch_related(
+            'publishing_house', 'series', 'authors'
         )
 
     def get_context_data(self, *args, **kwargs):

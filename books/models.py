@@ -85,7 +85,8 @@ class Series(models.Model):
     publishing_house = models.ForeignKey(
         'PublishingHouse',
         on_delete=models.CASCADE,
-        verbose_name='Издательство'
+        verbose_name='Издательство',
+        related_name='series'
     )
 
     def __str__(self):
