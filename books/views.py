@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 from books.models import (
     Book, Author, Genre,
@@ -120,3 +121,22 @@ class SignUpView(CreateView):
     form_class = RegistrationForm
     template_name = 'accounts/sign_up.html'
     success_url = reverse_lazy('login')
+
+
+class SearchResultsView(ListView):
+    model = Book
+    template_name = 'books/search_results.html'
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        
+        return Book.objects.filter(
+            Q(title__icontains=query) | Q(authors__name__icontains=query)
+        )
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['search_field'] = self.request.GET.get('q')
+
+        return context

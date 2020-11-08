@@ -1,8 +1,8 @@
 from django.urls import path
 
 from books.views import (
-    BookListView, BookDetailView, PublishingHouseListView, SeriesListView,
-    AuthorsListView, GenreListView
+    BookListView, BookDetailView, PublishingHouseListView, SeriesListView, AuthorsListView, GenreListView,
+    SearchResultsView
 ) 
 
 from django.views.decorators.cache import cache_page
@@ -13,7 +13,8 @@ urlpatterns = [
     # Index
     path(
         '',
-        cache_page(60 * 30)(BookListView.as_view()),
+        # cache_page(60 * 30)(BookListView.as_view()),
+        BookListView.as_view(),
         name='index'
     ),
 
@@ -51,4 +52,11 @@ urlpatterns = [
         cache_page(60 * 30)(GenreListView.as_view()),
         name='genre'
     ),
+
+    # Search
+    path(
+        'seaarch/',
+        SearchResultsView.as_view(),
+        name='search_results'
+    )
 ]

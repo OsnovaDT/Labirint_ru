@@ -1,0 +1,16 @@
+{% extends 'layout/print_books.html' %}
+
+{% block title %}
+Результаты по поиску: {{ search_field }}
+{% endblock title %}
+
+
+{% block main_text %}
+    <div class="row">
+        <div class="col-md-6 offset-md-1">
+            <h2>Результаты по поиску: {{ search_field }}</h2>
+        </div>
+    </div>
+    <hr>
+{% endblock main_text %}
+    
