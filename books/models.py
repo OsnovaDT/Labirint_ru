@@ -19,6 +19,12 @@ class Author(models.Model):
         max_length=100,
         unique=True,
     )
+    full_name = models.CharField(
+        'Полное имя',
+        max_length=100,
+        unique=True,
+        default='aaaa'
+    )
     info = models.TextField(
         'Информация',
         help_text='Информация об авторе',
@@ -75,12 +81,6 @@ class Series(models.Model):
         'Название',
         max_length=100,
         unique=True,
-    )
-    info = models.TextField(
-        'Информация',
-        help_text='Информация о серии',
-        null=True,
-        blank=True,
     )
     publishing_house = models.ForeignKey(
         'PublishingHouse',
@@ -139,7 +139,8 @@ class Book(models.Model):
 
     genre = models.ManyToManyField(
         'Genre',
-        verbose_name='Жанр'
+        verbose_name='Жанр',
+        blank=True
     )
 
     ID = models.PositiveIntegerField('ID')
