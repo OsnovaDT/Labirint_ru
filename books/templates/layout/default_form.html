@@ -1,0 +1,44 @@
+{% extends 'layout/basic.html' %}
+
+{% block content %}
+<div class="text-center row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="jumbotron">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    <ul class='alert alert-danger'>
+                        {% for error in form.non_field_errors %}
+                            <li><em>{{ error|escape }}</em></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% for field in form.visible_fields %}
+                    <p>
+                        {{ field.label_tag }}
+                        <br>
+                        {{ field }}
+                    </p>
+
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <li class='alert-danger'>
+                                <em>{{ error }}</em>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" name="next"
+                value='{{ next }}'>
+                {% block button %}
+                {% endblock button %}
+            </form>
+            {% block after_form %}
+            {% endblock after_form %}
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock content %}

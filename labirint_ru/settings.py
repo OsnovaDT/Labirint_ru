@@ -95,3 +95,11 @@ STATIC_URL = '/static/'
 MEDIA_URl = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Login and Logout
+
+LOGIN_REDIRECT_URL = 'books:index'
+
+LOGOUT_REDIRECT_URL = 'login'
+
+LOGIN_URL = 'login'

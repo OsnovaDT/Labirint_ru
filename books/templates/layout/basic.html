@@ -39,12 +39,24 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
+                            {% if not user.is_authenticated %}
+                                Пользователь
+                            {% else %}
+                                {{ user.username }}
+                            {% endif %}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            
+                            {% if not user.is_authenticated %}
+                                <a class='dropdown-item'
+                                href="{% url 'login' %}">
+                                    Войти
+                                </a>
+                            {% endif %}
+
                             <a class='dropdown-item'
-                            href=''>
-                                
+                            href="{% url 'logout' %}">
+                                Выйти
                             </a>
                         </div>
                     </li>
