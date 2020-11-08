@@ -23,6 +23,9 @@ INSTALLED_APPS = [
 
     # Debug toolbar
     'debug_toolbar',
+
+    # For VK
+    'social_django',
 ]
 
 INTERNAL_IPS = [
@@ -55,6 +58,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # VK
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -127,3 +134,22 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# VK
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+AUTHENTICATION_BACKENDS = {
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+}
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = config(
+    'SOCIAL_AUTH_VK_OAUTH2_KEY'
+)
+
+SOCIAL_AUTH_VK_OAUTH2_SECRET = config(
+    'SOCIAL_AUTH_VK_OAUTH2_SECRET'
+)
+
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']

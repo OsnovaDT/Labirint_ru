@@ -97,6 +97,12 @@ urlpatterns = [
         ),
         name='password_reset_complete'
     ),
+
+    # VK login
+    path(
+        'social_django/',
+        include('social_django.urls', namespace='social')
+    )
 ]
 
 if settings.DEBUG:
