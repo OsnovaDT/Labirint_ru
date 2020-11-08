@@ -7,11 +7,13 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if form.non_field_errors %}
-                    <ul class='alert alert-danger'>
+                <div class='alert alert-danger'>
+                    <ul>
                         {% for error in form.non_field_errors %}
                             <li><em>{{ error|escape }}</em></li>
                         {% endfor %}
                     </ul>
+                </div>
                 {% endif %}
 
                 {% for field in form.visible_fields %}
@@ -23,9 +25,9 @@
 
                     {% if field.errors %}
                         {% for error in field.errors %}
-                            <li class='alert-danger'>
-                                <em>{{ error }}</em>
-                            </li>
+                        <div class="alert alert-danger">
+                            <em>{{ error }}</em>
+                        </div>
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
