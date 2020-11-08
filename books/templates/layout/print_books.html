@@ -4,15 +4,28 @@
     {% block main_text %}
     {% endblock main_text %}
     
-    <div class="text-light row">
+    <div class="row">
         {% for book in books %}
             <div class="col-md-3">
-                <img src="{{ book.image.url }}"
-                alt="{{ book }}" height="165">
+                <!-- Image -->
+                <a href="{% url 'books:book_detail' book.pk %}">
+                    <img src="{{ book.image.url }}"
+                    alt="{{ book }}" height="165">
+                </a>
+                
+                <!-- Price -->
                 <h4><b>{{ book.price }} ₽</b></h4>
-                <h5>{{ book }}</h5>
+
+                <!-- Title -->
+                <a class='text-dark'
+                href="{% url 'books:book_detail' book.pk %}">
+                    <h5>{{ book }}</h5>
+                </a>
+
+                <!-- Author -->
                 <h6>{{ book.author }}</h6>
                 
+                <!-- Publishing house and series -->
                 {% if book.series %}
                     <h6>
                         {{ book.publishing_house }}: {{ book.series }}
