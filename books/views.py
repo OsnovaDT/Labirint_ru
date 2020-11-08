@@ -1,11 +1,14 @@
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 from books.models import (
     Book, Author, Genre,
     PublishingHouse, Series
 )
+from books.forms import RegistrationForm
 
 
 # For index page
@@ -111,3 +114,9 @@ class GenreListView(ListView):
         )
 
         return context
+
+
+class SignUpView(CreateView):
+    form_class = RegistrationForm
+    template_name = 'accounts/sign_up.html'
+    success_url = reverse_lazy('login')

@@ -3,5 +3,16 @@
 {% block title %}Вход на сайт{% endblock title %}
 
 {% block button %}
-    <input class='btn btn-success' type="submit" value="Войти">
+    <p>
+        <input class='btn btn-primary' type="submit" value="Войти">
+    </p>
 {% endblock button %}
+
+{% block after_form %}
+    <p>
+        <a href="{% url 'sign_up' %}">
+            <input class='btn btn-success' type="submit" value="Регистрация">
+        </a>
+    </p>
+{% endblock after_form %}
+    

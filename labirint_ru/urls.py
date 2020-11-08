@@ -7,6 +7,8 @@ from django.contrib.auth.views import (
     PasswordChangeDoneView
 )
 
+from books.views import SignUpView
+
 import debug_toolbar
 
 urlpatterns = [
@@ -48,6 +50,13 @@ urlpatterns = [
         ),
         name='password_change_done'
     ),
+
+    # Sign up
+    path(
+        'sign_up',
+        SignUpView.as_view(),
+        name='sign_up'
+    )
 ]
 
 if settings.DEBUG:
