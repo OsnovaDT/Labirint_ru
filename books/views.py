@@ -70,7 +70,6 @@ class AuthorsListView(ListView):
     context_object_name = 'books'
 
     def get_queryset(self):
-
         return Book.objects.filter(
             authors=self.kwargs['author_id']
         )
@@ -79,6 +78,26 @@ class AuthorsListView(ListView):
         context = super().get_context_data(*args, **kwargs)
         context['author'] = Author.objects.get(
             pk=self.kwargs['author_id']
+        )
+
+        return context
+
+
+# Genre books
+class GenreListView(ListView):
+    template_name = 'books/genre_books.html'
+    paginate_by = 12
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        return Book.objects.filter(
+            genres=self.kwargs['genre_id']
+        )
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['genre'] = Genre.objects.get(
+            pk=self.kwargs['genre_id']
         )
 
         return context

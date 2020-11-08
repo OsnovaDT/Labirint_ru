@@ -137,7 +137,7 @@ class Book(models.Model):
 
     price = models.PositiveIntegerField('Цена')
 
-    genre = models.ManyToManyField(
+    genres = models.ManyToManyField(
         'Genre',
         verbose_name='Жанр',
         blank=True
@@ -187,7 +187,7 @@ class Book(models.Model):
 
     def get_genres(self):
         return '\n'.join(
-            [genre.name for genre in self.genre.all()]
+            [genre.name for genre in self.genres.all()]
         )
 
     def __str__(self):

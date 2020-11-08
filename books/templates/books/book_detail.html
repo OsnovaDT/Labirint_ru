@@ -29,7 +29,7 @@
                     {% for author in book.authors.all %}
                         <h6>Автор: 
                             <a class='text-dark' href="{% url 'books:author' author.pk %}">
-                                {{ book.get_authors }}
+                                {{ author }}
                             </a>
                         </h6>
                     {% endfor %}
@@ -54,7 +54,14 @@
                 
                     <!-- Genres -->
                     {% if book.get_genres %}
-                    <h6>Жанр: {{ book.get_genres }}</h6>
+                        {% for genre in book.genres.all %}
+                            <h6>Жанр: 
+                                <a class='text-dark'
+                                href="{% url 'books:genre' genre.pk %}">
+                                    {{ genre }}
+                                </a>
+                            </h6>
+                        {% endfor %}
                     {% endif %}
                 
                     <hr>
