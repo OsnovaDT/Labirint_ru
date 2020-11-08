@@ -1,0 +1,30 @@
+{% extends 'layout/print_books.html' %}
+
+{% load static %}
+
+{% block title %}
+Серия книг {{ episode }}|издательство {{ episode.publishing_house }}|Лабиринт
+{% endblock title %}
+
+{% block main_text %}
+<!-- Episode and publishing house name -->
+<div class="row">
+    <div class="col-md-6 offset-md-1">
+        <h2>
+            Издательство «<a class='text-dark'href="{% url 'books:publ_house' episode.publishing_house.pk %}">{{ episode.publishing_house }}</a>»
+        </h2>
+        <h2>Серия «{{ episode }}»</h2>
+    </div>
+</div>
+
+<hr>
+
+<!-- Publishing house info -->
+<div class="row">
+    <div class="col-md-6 offset-md-1">
+        <h4>{{ episode.publishing_house.info }}</h4>
+    </div>
+</div>
+
+<hr>
+{% endblock main_text %}

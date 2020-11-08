@@ -1,0 +1,48 @@
+{% extends 'layout/print_books.html' %}
+
+{% load static %}
+
+{% block title %}
+    Книги издательства {{ publ_house }}
+{% endblock title %}
+
+{% block main_text %}
+    <!-- Publishing house name -->
+    <div class="row">
+        <div class="col-md-6 offset-md-1">
+            <h2>Издательство «{{ publ_house }}»</h2>
+        </div>
+    </div>
+    
+    <hr>
+
+    <!-- Publishing house info -->
+    <div class="row">
+        <div class="col-md-6 offset-md-1">
+            <h4><b>Об издательстве</b></h4>
+            <h4>{{ publ_house.info }}</h4>
+        </div>
+
+        <div class="col-md-2 offset-md-1">
+            <img src="{{ publ_house.image.url }}"
+            alt="{{ publ_house }}" height="160">
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Publishing house series -->
+    <div class="row">
+        <div class="col-md-6 offset-md-1">
+            <h4><b>Серии</b></h4>
+            {% for episode in series %}
+                <a class='text-dark'
+                href="{% url 'books:episode' episode.pk %}">
+                    <h4>{{ episode }}</h4>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <hr>
+{% endblock main_text %}

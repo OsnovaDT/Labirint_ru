@@ -26,14 +26,30 @@
             <div class="col-md-5 offset-md-4">
                 <div>
                     <!-- Author -->
-                    <h6>Автор: {{ book.get_authors }}</h6>
+                    {% for author in book.authors.all %}
+                        <h6>Автор: 
+                            <a class='text-dark' href="{% url 'books:author' author.pk %}">
+                                {{ book.get_authors }}
+                            </a>
+                        </h6>
+                    {% endfor %}
                 
                     <!-- Publishing house -->
-                    <h6>Издательство: {{ book.publishing_house }}</h6>
+                    <h6>Издательство:
+                        <a class='text-dark'
+                        href="{% url 'books:publ_house' book.publishing_house.pk %}">
+                            {{ book.publishing_house }}
+                        </a>
+                    </h6>
                 
                     <!-- Series -->
                     {% if book.series %}
-                    <h6>Серия: {{ book.series }}</h6>
+                    <h6>Серия: 
+                        <a class='text-dark'
+                        href="{% url 'books:episode' book.series.pk %}">
+                            {{ book.series }}
+                        </a>
+                    </h6>
                     {% endif %}
                 
                     <!-- Genres -->

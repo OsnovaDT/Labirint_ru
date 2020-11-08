@@ -4,7 +4,7 @@
     {% block main_text %}
     {% endblock main_text %}
     
-    <div class="row">
+    <div class="row offset-md-1">
         {% for book in books %}
             <div class="col-md-3">
                 <!-- Image -->
@@ -22,16 +22,30 @@
                     <h5>{{ book }}</h5>
                 </a>
 
-                <!-- Author -->
-                <h6>{{ book.author }}</h6>
-                
+                <!-- Authors -->
+                {% for author in book.authors.all %}
+                    <a class='text-dark'
+                    href="{% url 'books:author' author.pk %}">
+                        <h6>{{ author }}</h6>
+                    </a>
+                {% endfor %}
+                                    
                 <!-- Publishing house and series -->
                 {% if book.series %}
                     <h6>
-                        {{ book.publishing_house }}: {{ book.series }}
+                        <a class='text-dark' href="{% url 'books:publ_house' book.publishing_house.pk %}">
+                            {{ book.publishing_house }}
+                        </a>
+                        : <a class='text-dark'
+                        href="{% url 'books:episode' book.series.pk %}">
+                            {{ book.series }}
+                        </a>
                     </h6>
                 {% else %}
+                <a class='text-dark'
+                href="{% url 'books:publ_house' book.publishing_house.pk %}">
                     <h6>{{ book.publishing_house }}</h6>
+                </a>
                 {% endif %}
             </div>
         {% endfor %}
