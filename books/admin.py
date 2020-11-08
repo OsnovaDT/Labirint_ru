@@ -23,7 +23,7 @@ class BookAdmin(admin.ModelAdmin):
 
 class SeriesAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 'info', 'publishing_house',
+        'name', 'publishing_house',
     )
     list_display_links = (
         'name', 'publishing_house',
