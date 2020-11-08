@@ -102,6 +102,11 @@ urlpatterns = [
     path(
         'social_django/',
         include('social_django.urls', namespace='social')
+    ),
+
+    path(
+        'captcha/',
+        include('captcha.urls'),
     )
 ]
 

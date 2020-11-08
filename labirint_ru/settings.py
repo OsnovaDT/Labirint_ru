@@ -26,6 +26,9 @@ INSTALLED_APPS = [
 
     # For VK
     'social_django',
+
+    # Simple CAPTCHA
+    'captcha',
 ]
 
 INTERNAL_IPS = [
