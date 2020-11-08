@@ -2,8 +2,7 @@
 
 {% block content %}
 <div class="text-center row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <div class="jumbotron">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -39,6 +38,5 @@
             {% endblock after_form %}
         </div>
     </div>
-    <div class="col-md-4"></div>
 </div>
 {% endblock content %}
