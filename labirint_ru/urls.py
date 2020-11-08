@@ -4,7 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Admin
     path('admin/', admin.site.urls),
+
+    # Index
+    path('index/', include('books.urls')),
 ]
 
 if settings.DEBUG:
