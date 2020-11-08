@@ -1,0 +1,15 @@
+{% extends 'layout/basic.html' %}
+
+{% block content %}
+<div class="text-center row">
+    <div class="col-md-4 offset-md-4">
+        <div class="jumbotron">
+            {% block text %}
+            {% endblock text %}
+            <a href="{% url 'books:index' %}">
+                <input class='btn btn-success' type="submit" value="Главная">
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
